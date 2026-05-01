@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafit Mustofa - Personal Portfolio</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3366cc', // Warna biru kustom untuk tombol
+                        bgLight1: '#9ec4f5',
+                        bgLight2: '#c9e0fa',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.4s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar untuk tampilan yang lebih bersih */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+        
+        /* Smooth transition untuk pergantian tema */
+        body, .card-bg {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-bgLight1 to-bgLight2 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200 font-poppins min-h-screen flex items-center justify-center p-4 lg:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-6xl w-full flex flex-col md:flex-row gap-6 h-[95vh] md:h-[85vh]">
+
+        <!-- ================= SIDEBAR (KIRI) ================= -->
+        <aside class="w-full md:w-[35%] lg:w-[30%] card-bg bg-white dark:bg-gray-800 rounded-xl shadow-lg flex flex-col p-6 relative overflow-y-auto">
+            
+            <!-- Dark Mode Toggle -->
+            <button id="theme-toggle" class="absolute top-6 right-6 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 focus:outline-none transition-colors">
+                <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-xl hidden"></i>
+                <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-xl"></i>
+            </button>
+
+            <!-- Profile Info -->
+            <div class="flex flex-col items-center mt-4">
+                <!-- Foto Profil Bulat -->
+                <!-- Ganti src dengan link foto asli Anda -->
+                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-md mb-4 bg-blue-100 flex items-center justify-center">
+                    <img src="https://i.pravatar.cc/300?img=11" alt="Kafit Mustofa" class="w-full h-full object-cover">
+                </div>
+                
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white text-center">Kafit Mustofa</h1>
+                <p class="text-sm text-center text-gray-600 dark:text-gray-400 mt-2 font-medium px-2">
+                    Digital Marketing | Content Creator | Social Media Specialist | Copy Writing
+                </p>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex flex-col gap-2 mt-8">
+                <button onclick="showSection('about')" data-target="about" class="nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 bg-primary text-white">
+                    ABOUT
+                </button>
+                <button onclick="showSection('skills')" data-target="skills" class="nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    SKILLS
+                </button>
+                <button onclick="showSection('projects')" data-target="projects" class="nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    PROJECTS
+                </button>
+                <button onclick="showSection('contact')" data-target="contact" class="nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    CONTACT
+                </button>
+                <button onclick="showSection('cv')" data-target="cv" class="nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    DOWNLOAD CV
+                </button>
+            </nav>
+
+            <!-- Footer Sidebar -->
+            <div class="mt-auto pt-8 text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400">
+                    Made with <i class="fa-solid fa-heart text-gray-400"></i> by Me
+                </p>
+            </div>
+        </aside>
+
+        <!-- ================= MAIN CONTENT (KANAN) ================= -->
+        <main class="w-full md:w-[65%] lg:w-[70%] card-bg bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 lg:p-10 overflow-y-auto relative">
+            
+            <!-- SECTION: ABOUT -->
+            <section id="about" class="content-section animate-fade-in">
+                <!-- Header -->
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">About</h2>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-700 mb-8"></div>
+
+                <!-- Foto Profil Kotak -->
+                <div class="flex justify-center mb-8">
+                    <!-- Ganti src dengan link foto asli Anda -->
+                    <div class="w-48 h-56 rounded-md overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm bg-blue-100">
+                        <img src="https://i.pravatar.cc/300?img=11" alt="Foto Kafit Mustofa" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Subjudul -->
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-circle-info text-gray-900 dark:text-white text-lg"></i>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">About Me</h3>
+                </div>
+
+                <!-- Deskripsi -->
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px] text-justify">
+                    Halo, nama saya Kafit Mustofa. Lulusan S1-Teknik Informatika yang menyukai dunia digital. 
+                    saya memiliki pengalaman sebagai Social Media Specialist, Content Creator dan Digital 
+                    marketing. Rasanya luar biasa melihat diri saya berkembang, dan saya berharap dapat terus 
+                    berkembang dan menjadi lebih baik dari sekarang.
+                </p>
+            </section>
+
+            <!-- SECTION: SKILLS -->
+            <section id="skills" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Skills</h2>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-700 mb-6"></div>
+
+                <div class="pb-4">
+                    <!-- Soft Skills -->
+                    <h3 class="font-bold text-gray-500 dark:text-gray-400 mb-4 text-lg"> Soft Skill</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        <!-- Komunikasi -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-500 w-10 text-center"><i class="fa-solid fa-comments"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Komunikasi</span>
+                        </div>
+                        <!-- Percaya Diri -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-orange-500 w-10 text-center"><i class="fa-solid fa-user-shield"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Percaya Diri</span>
+                        </div>
+                        <!-- Team Work -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-red-500 w-10 text-center"><i class="fa-solid fa-users-gear"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Team Work</span>
+                        </div>
+                        <!-- Fleksibilitas -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-800 dark:text-blue-400 w-10 text-center"><i class="fa-solid fa-shuffle"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Fleksibilitas</span>
+                        </div>
+                        <!-- Kreatif dan Inovatif -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-yellow-500 w-10 text-center"><i class="fa-solid fa-lightbulb"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Kreatif Dan Inov...</span>
+                        </div>
+                        <!-- Adaptasi -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-teal-500 w-10 text-center"><i class="fa-solid fa-puzzle-piece"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Adaptasi</span>
+                        </div>
+                    </div>
+
+                    <!-- Hard Skills -->
+                    <h3 class="font-bold text-gray-500 dark:text-gray-400 mb-4 text-lg"> Hard Skill</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Digital Marketing -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-pink-500 w-10 text-center"><i class="fa-solid fa-bullhorn"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Digital Marketing</span>
+                        </div>
+                        <!-- Content Planning -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-cyan-600 dark:text-cyan-400 w-10 text-center"><i class="fa-solid fa-calendar-check"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Content Planning</span>
+                        </div>
+                        <!-- Social Media Management -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-500 w-10 text-center"><i class="fa-solid fa-share-nodes"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Social Media Ma...</span>
+                        </div>
+                        <!-- Data Analis -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-indigo-500 dark:text-indigo-400 w-10 text-center"><i class="fa-solid fa-chart-line"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Data Analis</span>
+                        </div>
+                        <!-- Copy Writing -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-purple-500 w-10 text-center"><i class="fa-solid fa-pen-nib"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Copy Writing</span>
+                        </div>
+                        <!-- Market Research -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-orange-600 dark:text-orange-400 w-10 text-center"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Market Research</span>
+                        </div>
+                    </div>
+
+                    <!-- Software -->
+                    <h3 class="font-bold text-gray-500 dark:text-gray-400 mb-4 mt-8 text-lg"> Software</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Microsoft Word -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-600 w-10 text-center"><i class="fa-solid fa-file-word"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Microsoft Word</span>
+                        </div>
+                        <!-- Microsoft Excel -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-green-600 w-10 text-center"><i class="fa-solid fa-file-excel"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Microsoft Excel</span>
+                        </div>
+                        <!-- Microsoft PowerPoint -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-orange-600 w-10 text-center"><i class="fa-solid fa-file-powerpoint"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Microsoft Powe...</span>
+                        </div>
+                        <!-- Photoshop -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="w-10 flex justify-center">
+                                <div class="bg-[#001833] text-[#31a8ff] text-sm font-bold w-8 h-8 flex items-center justify-center rounded border-2 border-[#31a8ff]">Ps</div>
+                            </div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Photoshop</span>
+                        </div>
+                        <!-- Premiere Pro -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="w-10 flex justify-center">
+                                <div class="bg-[#00005b] text-[#9999ff] text-sm font-bold w-8 h-8 flex items-center justify-center rounded border-2 border-[#9999ff]">Pr</div>
+                            </div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Premiere Pro</span>
+                        </div>
+                        <!-- Capcut -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-black dark:text-white w-10 text-center"><i class="fa-solid fa-clapperboard"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Capcut</span>
+                        </div>
+                        <!-- Google Trends -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-500 w-10 text-center"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Google Trends</span>
+                        </div>
+                        <!-- Meta Business Suite -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-blue-600 w-10 text-center"><i class="fa-brands fa-meta"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">Meta Business Su...</span>
+                        </div>
+                        <!-- TikTok Creative Center -->
+                        <div class="bg-white dark:bg-gray-800 shadow-md shadow-gray-200 dark:shadow-gray-900 rounded-lg p-3 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer active:scale-95">
+                            <div class="text-3xl text-black dark:text-white w-10 text-center"><i class="fa-brands fa-tiktok"></i></div>
+                            <span class="font-bold text-xs text-gray-800 dark:text-gray-200 uppercase truncate">TikTok Creative ...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: PROJECTS -->
+            <section id="projects" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Projects</h2>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-700 mb-6"></div>
+
+                <div class="pb-4">
+                    <h3 class="font-bold text-gray-500 dark:text-gray-400 mb-4 text-lg"> Public</h3>
+                    
+                    <!-- Grid Projects -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Project Card 1: Si Pak Komputer -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-200 dark:shadow-gray-900 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 dark:border-gray-700">
+                            <!-- Image Thumbnail (Klik untuk Modal) -->
+                            <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-gray-700 overflow-hidden cursor-pointer relative group" onclick="openModal('Si Pak Komputer', 'Sistem Pakar Kerusakan Komputer adalah aplikasi berbasis web yang membantu pengguna untuk mendiagnosis kerusakan pada komputer beserta solusi perbaikannya berdasarkan gejala yang dialami. Dibangun menggunakan teknologi yang handal dan mudah digunakan.', ['https://picsum.photos/seed/project1a/600/400', 'https://picsum.photos/seed/project1b/600/400', 'https://picsum.photos/seed/project1c/600/400'])">
+                                <img src="https://picsum.photos/seed/project1a/600/400" alt="Si Pak Komputer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <!-- Title -->
+                            <div class="p-4 flex-grow">
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white">Si Pak Komputer</h4>
+                            </div>
+                            <!-- Action Buttons -->
+                            <div class="flex border-t border-gray-200 dark:border-gray-700">
+                                <a href="https://drive.google.com/file/d/1oW2x9dmAZ3UidtX-BPjqyrJelBiroxB3/view?usp=sharing" target="_blank" class="w-full py-3 flex items-center justify-center gap-2 text-primary dark:text-blue-400 font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors">
+                                    <i class="fa-brands fa-google-drive text-lg text-green-600 dark:text-green-400"></i> GOOGLE DRIVE
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 2: Movie Finder -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-200 dark:shadow-gray-900 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 dark:border-gray-700">
+                            <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-gray-700 overflow-hidden cursor-pointer relative group" onclick="openModal('Movie Finder - Dicoding', 'Proyek pencarian film ini menampilkan data film populer dari API eksternal. Pengguna dapat mencari film favorit, melihat rating, dan tanggal rilisnya dengan antarmuka yang bersih dan responsif.', ['https://picsum.photos/seed/project2a/600/400', 'https://picsum.photos/seed/project2b/600/400'])">
+                                <img src="https://picsum.photos/seed/project2a/600/400" alt="Movie Finder - Dicoding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white">Movie Finder - Dicoding</h4>
+                            </div>
+                            <div class="flex border-t border-gray-200 dark:border-gray-700">
+                                <a href="#" target="_blank" class="w-full py-3 flex items-center justify-center gap-2 text-primary dark:text-blue-400 font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors">
+                                    <i class="fa-brands fa-google-drive text-lg text-green-600 dark:text-green-400"></i> GOOGLE DRIVE
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 3 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-200 dark:shadow-gray-900 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 dark:border-gray-700">
+                            <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-gray-700 overflow-hidden cursor-pointer relative group" onclick="openModal('Game & Movie Portal', 'Sebuah portal yang merangkum berbagai informasi seputar game dan film populer. Memiliki fitur filter kategori, pencarian detail, dan review menarik bagi pengunjung.', ['https://picsum.photos/seed/project3a/600/400', 'https://picsum.photos/seed/project3b/600/400', 'https://picsum.photos/seed/project3c/600/400'])">
+                                <img src="https://picsum.photos/seed/project3a/600/400" alt="Game & Movie Portal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white">Game & Movie Portal</h4>
+                            </div>
+                            <div class="flex border-t border-gray-200 dark:border-gray-700">
+                                <a href="#" target="_blank" class="w-full py-3 flex items-center justify-center gap-2 text-primary dark:text-blue-400 font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors">
+                                    <i class="fa-brands fa-google-drive text-lg text-green-600 dark:text-green-400"></i> GOOGLE DRIVE
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 4 -->
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-200 dark:shadow-gray-900 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-gray-100 dark:border-gray-700">
+                            <div class="w-full aspect-[4/3] bg-gray-200 dark:bg-gray-700 overflow-hidden cursor-pointer relative group" onclick="openModal('Sistem Informasi Perpustakaan', 'Aplikasi manajemen perpustakaan digital untuk mempermudah proses peminjaman, pengembalian, dan pendataan buku secara efisien dan terstruktur.', ['https://picsum.photos/seed/project4a/600/400', 'https://picsum.photos/seed/project4b/600/400'])">
+                                <img src="https://picsum.photos/seed/project4a/600/400" alt="Sistem Informasi Perpustakaan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white">Sistem Informasi Perpustakaan</h4>
+                            </div>
+                            <div class="flex border-t border-gray-200 dark:border-gray-700">
+                                <a href="#" target="_blank" class="w-full py-3 flex items-center justify-center gap-2 text-primary dark:text-blue-400 font-semibold hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors">
+                                    <i class="fa-brands fa-google-drive text-lg text-green-600 dark:text-green-400"></i> GOOGLE DRIVE
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: CONTACT -->
+            <section id="contact" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Contact</h2>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-700 mb-8"></div>
+                
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Informasi Kontak -->
+                    <div class="lg:w-1/3 flex flex-col gap-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Mari Terhubung!</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                            Apakah Anda memiliki pertanyaan atau tawaran kerjasama? Jangan ragu untuk menghubungi saya melalui kontak di bawah ini.
+                        </p>
+                        
+                        <!-- Email -->
+                        <div class="flex items-center gap-4 transition-transform duration-300 hover:translate-x-1">
+                            <div class="w-12 h-12 shrink-0 bg-blue-50 dark:bg-gray-700 text-primary dark:text-blue-400 rounded-full flex items-center justify-center text-xl shadow-sm border border-blue-100 dark:border-gray-600">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Email</p>
+                                <a href="mailto:emailanda@domain.com" class="text-gray-800 dark:text-gray-200 font-semibold hover:text-primary dark:hover:text-blue-400 transition-colors text-sm break-all">emailanda@domain.com</a>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="flex items-center gap-4 transition-transform duration-300 hover:translate-x-1">
+                            <div class="w-12 h-12 shrink-0 bg-green-50 dark:bg-gray-700 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center text-xl shadow-sm border border-green-100 dark:border-gray-600">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">WhatsApp</p>
+                                <!-- Ubah nomor di href sesuai nomor WA Anda (gunakan kode negara 62) -->
+                                <a href="https://wa.me/6281234567890" target="_blank" class="text-gray-800 dark:text-gray-200 font-semibold hover:text-green-600 dark:hover:text-green-400 transition-colors text-sm">+62 812-3456-7890</a>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div class="mt-4 flex gap-3">
+                            <a href="https://id.linkedin.com/in/joko-widodo" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-all duration-300 shadow-sm hover:-translate-y-1">
+                                <i class="fa-brands fa-linkedin-in text-lg"></i>
+                            </a>
+                            <a href="https://www.instagram.com/jokowi/" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-pink-600 hover:text-white dark:hover:bg-pink-600 transition-all duration-300 shadow-sm hover:-translate-y-1">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@jokowi" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-black hover:text-white dark:hover:bg-gray-600 transition-all duration-300 shadow-sm hover:-translate-y-1">
+                                <i class="fa-brands fa-tiktok text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Form Kontak -->
+                    <div class="lg:w-2/3 bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                        <form action="#" method="POST" class="flex flex-col gap-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <!-- Input Nama -->
+                                <div class="relative group">
+                                    <input type="text" id="name" placeholder=" " class="block w-full px-4 py-3 text-gray-900 bg-transparent border-2 border-gray-300 rounded-lg appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer transition-all duration-300 bg-white dark:bg-gray-700 shadow-sm focus:shadow-md" required>
+                                    <label for="name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin- bg-white dark:bg-gray-700 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-3 cursor-text">Nama Lengkap</label>
+                                </div>
+                                
+                                <!-- Input Email -->
+                                <div class="relative group">
+                                    <input type="email" id="email" placeholder=" " class="block w-full px-4 py-3 text-gray-900 bg-transparent border-2 border-gray-300 rounded-lg appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer transition-all duration-300 bg-white dark:bg-gray-700 shadow-sm focus:shadow-md" required>
+                                    <label for="email" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin- bg-white dark:bg-gray-700 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-3 cursor-text">Email</label>
+                                </div>
+                            </div>
+                            
+                            <!-- Input Subjek -->
+                            <div class="relative group">
+                                <input type="text" id="subject" placeholder=" " class="block w-full px-4 py-3 text-gray-900 bg-transparent border-2 border-gray-300 rounded-lg appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer transition-all duration-300 bg-white dark:bg-gray-700 shadow-sm focus:shadow-md" required>
+                                <label for="subject" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin- bg-white dark:bg-gray-700 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-3 cursor-text">Subjek</label>
+                            </div>
+                            
+                            <!-- Input Pesan -->
+                            <div class="relative group mt-1">
+                                <textarea id="message" rows="4" placeholder=" " class="block w-full px-4 py-3 text-gray-900 bg-transparent border-2 border-gray-300 rounded-lg appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer transition-all duration-300 bg-white dark:bg-gray-700 resize-none shadow-sm focus:shadow-md" required></textarea>
+                                <label for="message" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin- bg-white dark:bg-gray-700 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-4 peer-placeholder-shown:top-6 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-3 cursor-text">Pesan</label>
+                            </div>
+
+                            <button type="submit" class="mt-2 w-full md:w-auto self-end bg-primary text-white py-3 px-8 rounded-lg font-semibold hover:bg-blue-700 hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: CV -->
+            <section id="cv" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Download CV</h2>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-700 mb-8"></div>
+                <div class="flex flex-col items-center justify-center h-40 text-gray-500 dark:text-gray-400">
+                    <i class="fa-solid fa-file-pdf text-4xl mb-4"></i>
+                    <a href="https://drive.google.com/file/d/1O1QapLIroEw8pGhkwAbIhbO5R7GTeeNw/view?usp=sharing" target="_blank" class="mt-4 px-6 py-2 bg-primary text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer inline-flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal Popup Container -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 px-4">
+        <div id="project-modal-content" class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]">
+            <!-- Header Modal -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/80">
+                <h3 id="modal-title" class="text-xl font-bold text-gray-900 dark:text-white">Project Title</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <!-- Body Modal -->
+            <div class="p-5 overflow-y-auto">
+                <!-- Carousel Container -->
+                <div class="relative w-full h-auto mb-3 group">
+                    <img id="modal-image" src="" alt="Project Preview" class="w-full h-64 md:h-80 object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm transition-opacity duration-300">
+                    
+                    <!-- Tombol Navigasi Kiri Kanan -->
+                    <button id="modal-prev-btn" onclick="prevModalImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80 focus:outline-none hidden">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button id="modal-next-btn" onclick="nextModalImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80 focus:outline-none hidden">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Thumbnail Container -->
+                <div id="modal-thumbnails" class="flex gap-2 mb-4 overflow-x-auto pb-2 hidden scrollbar-hide">
+                    <!-- Thumbnails di-generate lewat JS -->
+                </div>
+
+                <h4 class="font-bold text-gray-800 dark:text-gray-200 mb-2">Deskripsi Proyek:</h4>
+                <p id="modal-desc" class="text-gray-600 dark:text-gray-300 leading-relaxed text-[15px] text-justify"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // === Logika Navigasi Tab ===
+        function showSection(sectionId) {
+            // 1. Sembunyikan semua section konten
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => {
+                sec.classList.add('hidden');
+                sec.classList.remove('animate-fade-in'); // Hapus kelas animasi
+            });
+
+            // 2. Reset style semua tombol navigasi
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.className = 'nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700';
+            });
+
+            // 3. Tampilkan section yang dipilih
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                // Paksa reflow agar animasi bisa di-trigger ulang
+                void targetSection.offsetWidth; 
+                targetSection.classList.add('animate-fade-in');
+            }
+
+            // 4. Highlight tombol yang aktif
+            const activeButton = document.querySelector(`button[data-target="${sectionId}"]`);
+            if (activeButton) {
+                activeButton.className = 'nav-btn w-full py-3 px-4 rounded-md text-sm font-semibold transition-all duration-200 bg-primary text-white shadow-md';
+            }
+        }
+
+        // === Logika Dark Mode Toggle ===
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const htmlElement = document.documentElement;
+
+        // Cek preferensi awal (default ke light mode sesuai gambar)
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // Toggle icon
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // Toggle theme
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // === Logika Modal Project dengan Multiple Image ===
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('project-modal-content');
+        
+        let currentImagesArray = [];
+        let currentImageIndex = 0;
+
+        function openModal(title, description, imgData) {
+            // Cek apakah imgData array atau string (dukungan untuk foto tunggal atau jamak)
+            currentImagesArray = Array.isArray(imgData) ? imgData : [imgData];
+            currentImageIndex = 0;
+
+            // Set judul dan deskripsi
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = description;
+            
+            // Tampilkan foto pertama dan thumbnail
+            updateModalImage();
+            renderThumbnails();
+
+            // Tampilkan atau Sembunyikan tombol Kiri/Kanan
+            const showArrows = currentImagesArray.length > 1;
+            document.getElementById('modal-prev-btn').style.display = showArrows ? 'flex' : 'none';
+            document.getElementById('modal-next-btn').style.display = showArrows ? 'flex' : 'none';
+
+            // Tampilkan modal
+            modal.classList.remove('pointer-events-none');
+            modal.classList.add('opacity-100');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function updateModalImage() {
+            const imgElement = document.getElementById('modal-image');
+            
+            // Efek fade-out -> ganti src -> fade-in
+            imgElement.style.opacity = '0';
+            setTimeout(() => {
+                imgElement.src = currentImagesArray[currentImageIndex];
+                imgElement.style.opacity = '1';
+            }, 150);
+
+            highlightActiveThumbnail();
+        }
+
+        function nextModalImage() {
+            currentImageIndex = (currentImageIndex + 1) % currentImagesArray.length;
+            updateModalImage();
+        }
+
+        function prevModalImage() {
+            currentImageIndex = (currentImageIndex - 1 + currentImagesArray.length) % currentImagesArray.length;
+            updateModalImage();
+        }
+
+        function setModalImageByIndex(index) {
+            currentImageIndex = index;
+            updateModalImage();
+        }
+
+        function renderThumbnails() {
+            const thumbContainer = document.getElementById('modal-thumbnails');
+            thumbContainer.innerHTML = ''; // bersihkan thumbnail lama
+            
+            if (currentImagesArray.length <= 1) {
+                thumbContainer.classList.add('hidden');
+                return;
+            }
+            
+            thumbContainer.classList.remove('hidden');
+            
+            currentImagesArray.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.id = `thumb-${index}`;
+                // Styling untuk thumbnail
+                img.className = `w-14 h-14 object-cover rounded-md cursor-pointer border-2 transition-all duration-300 ${index === currentImageIndex ? 'border-primary opacity-100 scale-105' : 'border-transparent opacity-50 hover:opacity-100'}`;
+                img.onclick = () => setModalImageByIndex(index);
+                thumbContainer.appendChild(img);
+            });
+        }
+
+        function highlightActiveThumbnail() {
+            if (currentImagesArray.length <= 1) return;
+            currentImagesArray.forEach((_, index) => {
+                const thumb = document.getElementById(`thumb-${index}`);
+                if (thumb) {
+                    if (index === currentImageIndex) {
+                        thumb.classList.add('border-primary', 'opacity-100', 'scale-105');
+                        thumb.classList.remove('border-transparent', 'opacity-50');
+                    } else {
+                        thumb.classList.remove('border-primary', 'opacity-100', 'scale-105');
+                        thumb.classList.add('border-transparent', 'opacity-50');
+                    }
+                }
+            });
+        }
+
+        function closeModal() {
+            // Sembunyikan modal
+            modal.classList.remove('opacity-100');
+            modal.classList.add('pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        // Tutup modal jika user mengklik area luar modal (backdrop gelap)
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
